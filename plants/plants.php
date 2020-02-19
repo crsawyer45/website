@@ -1,25 +1,36 @@
-<?php
-include "dbConnect.php";
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
 
-$sql = "SELECT Timestamp, Temp, Humidity FROM PlantInfo ORDER BY Timestamp ASC LIMIT 10080";
-$result = $conn->query($sql);
-$str = "var data = google.visualization.arrayToDataTable([['Timestamp', 'Temperature', 'Humidity'],";
-if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        $str .= "['" . $row["Timestamp"]. "', " . $row["Temp"]. "," . $row["Humidity"]. "],";
-    }
-} else {
-    echo "0 results";
-}
-$print = substr($str, 0, -1);
-$print .= "]);";
-$conn->close();
-echo $print;
-?>
+      function drawChart() {
+        <?php include "getPlantInfo.php"; ?>
+
+        var options = {
+          title: 'Temperature and Humidity of the Terrarium',
+          legend: {position: 'best' },
+          series: {
+            0: {targetAxisIndex: 0},
+            1: {targetAxisIndex: 1}
+          },
+          vAxes: {
+            0: {title: 'Temperature (°F)'},
+            1: {title: 'Humidity (%)'}
+          },
+          colors: ['#f02222','#2271f0']
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('line_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="line_chart" style="width: 900px; height: 500px"></div>
+  </body>
+</html>
+
+

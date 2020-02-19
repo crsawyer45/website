@@ -12,7 +12,7 @@
 
     // Prepare SQL statement
 
-    $sql = "INSERT INTO Plants.PlantInfo VALUES ('".$_GET["temp"]."', '".$_GET["humidity"]."', now())";
+    $sql = "INSERT INTO Plants.PlantInfo VALUES ('".$_GET["temp"]."', '".$_GET["humidity"]."', now() - 50000)";
 
     // Execute SQL statement
 
