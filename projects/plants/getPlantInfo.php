@@ -7,7 +7,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT Timestamp, Temperature, Humidity FROM PlantInfo ORDER BY Timestamp ASC LIMIT 10080";
+$sql = "SELECT Timestamp, Temperature, Humidity FROM PlantInfo ORDER BY Timestamp ASC LIMIT 170";
 $result = $conn->query($sql);
 $str = "var data = google.visualization.arrayToDataTable([['Timestamp', 'Temperature', 'Humidity'],";
 if ($result->num_rows > 0) {
