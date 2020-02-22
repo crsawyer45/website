@@ -91,6 +91,7 @@
   </section><!-- #hero -->
 
   <main id="main">
+    <div id="line_chart" style="width: 900px; height: 500px"></div>
 
   </main>
 
@@ -136,6 +137,5 @@
 
   <!-- Template Main Javascript File -->
   <script src="/js/main.js"></script>
-  <div id="line_chart" style="width: 900px; height: 500px"></div>
 </body>
 </html>
